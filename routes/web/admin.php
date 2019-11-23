@@ -13,7 +13,13 @@
 
 Route::get('/home', function () {
     return view('admin.home');
-});
+})->middleware('checkIfAdmin');
 
-Auth::routes();
+Route::get('/empList', 'admin\empController@getList');
+
+Route::get('/profile', [
+    'as' => 'employee.getByID',
+    'uses' => 'admin\empController@getProfile',
+]);
+
 

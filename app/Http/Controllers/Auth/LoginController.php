@@ -40,12 +40,15 @@ class LoginController extends Controller
 
     public function redirectTo(Request $request)
     {
+        //error_log(auth()->user());
+        
+        
         if (auth()->user()->role == 1) {
             return '/admin/home';
         } else if (auth()->user()->role == 2) {
             return '/manager/home';
         } else if (auth()->user()->role == 3){
             return '/seller/home';
-        }
+        } 
     }
 }
