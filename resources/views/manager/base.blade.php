@@ -26,7 +26,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">{{$title}}{{session('id')}}</a>
+    <a class="navbar-brand mr-1" href="index.html">{{$title}}</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -41,7 +41,7 @@
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
+          <span class="badge badge-danger"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -53,7 +53,7 @@
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
+          <span class="badge badge-danger"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -64,10 +64,11 @@
       </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
+          {{Auth::user()->username}}
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Edit Profile</a>
+          <a class="dropdown-item" href="{{route('managerProfile.edit')}}">Edit Profile</a>
+          <a class="dropdown-item" href="{{route('managerProfile.settings')}}">Settings</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
@@ -79,7 +80,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
+    <ul class="sidebar navbar-nav" style="">
       <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -140,21 +141,21 @@
             </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{route('manager.profile')}}">
               <i class="fas fa-user-circle"></i>
               <span>User Profile</span>
             </a>
         </li>
     </ul>
 
-    <div id="content-wrapper">
-      <div class="container-fluid">
+    <div id="content-wrapper" style="background:-webkit-repeating-linear-gradient(90deg,white,cyan,white)">
+      <div class="container-fluid col-sm-10 offset-sm-1">
           @yield('content')
       </div>
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
-      <footer class="sticky-footer">
+      <footer class="sticky-footer" style="">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright © Your Website 2019</span>
