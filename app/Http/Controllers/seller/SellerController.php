@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\manager;
+namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -11,17 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller
 {
-    public function manager_profile(){
-        $id = Auth::user()->id;
-        $data = DB::table('employees')
-                 ->join('logins', 'employees.log_id', '=', 'logins.id')
-                 ->join('roles', 'logins.role', '=', 'roles.id')
-                 ->join('outlets', 'employees.out_id', '=', 'outlets.id')
-                 ->select('logins.username','logins.password', 'roles.name as role','employees.name as mname', 'employees.contact', 'employees.salary', 'employees.img','outlets.name as out')
-                 ->where('employees.log_id', '=', $id)
-                 ->get();
-        //return $data;
-        return view('manager.manager_profile')->with('data',$data)->with("title","Profile");
+    public function invoice(){
+        return view('seller.bill.invoice');
     }
 
     public function edit_profile(){
