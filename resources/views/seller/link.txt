@@ -1,0 +1,3 @@
+https://github.com/FahimDev/Laravel-LabExam-6-Hours-/blob/master/DevEx/app/Http/Controllers/AdminController.php
+https://github.com/FahimDev/Laravel-LabExam-6-Hours-/blob/master/DevEx/resources/views/photoUpload/viewProduct.blade.php
+https://github.com/antonin686/NodeJS-Multi-Outlet-Management-System/blob/master/views/seller/invoice.ejs

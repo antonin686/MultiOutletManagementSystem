@@ -159,7 +159,7 @@
                   </div>
                   <div class="mr-5">View Food Items</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="/seller/food-items">
                   <span class="float-left">Item List</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -208,7 +208,7 @@
                   </div>
             <div class="mr-5">Order Status</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="/seller/order-status">
                   <span class="float-left">View Details</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
