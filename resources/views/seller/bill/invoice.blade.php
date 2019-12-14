@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- Laravel Ajax needs !-->
     <title>Invoice</title>
 
  <!-- Custom fonts for this template-->
@@ -106,6 +107,14 @@
 <!--Body Section End-->
 <script>
 $(document).ready(function(){
+
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    //Laravel Ajax needs
+
     var i = 1 ;
     var sum= 0 ;
     var d = new Date();
@@ -117,7 +126,7 @@ $(document).ready(function(){
     $('#ticket').val(d + e);
     $('#addMore').on('click',function(){
         i++;
-        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code'+i+'" name="'+i+'"></td><td class="f_name">Burger</td><td> <input type="text" class="cost" id="cost'+i+'" name="cost"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
+        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code" name="'+i+'"></td><td class="f_name">Burger</td><td> <input type="text" class="cost" id="cost'+i+'" name="cost"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
         //sum.val(0) ;
     });
     $('#total').on('click',function(){
@@ -140,24 +149,36 @@ $(document).ready(function(){
     $('#result').text(m);
     });
 
-    /*
+    
    
-     $.ajax({
-                    url: `/seller/invoice/searchAjax/${f}`, 
+    $(document).on('keyup','#food_code',function(e){
+        var f =$(this).val();
+        var w =$(this).attr("name");
+        //alert(w);
+        //var f = $('#food_code').val();
+        //var j= $(e.currentTarget).text();
+        console.log(f);
+                     $.ajax({
+                    url: `/seller/invoice/searchAjax`, 
+                    type:'GET',
+                    
+                    dataType:"json",
+                    data:{query:f},
                     success: (f_cost) => {
                         console.log(f_cost);
                         var html = '';
                         
                         if(f_cost != null)
                         {
-                            var g = f_cost[0].itemCost;
+                            var g = f_cost[0].item_cost;
                             $('#cost'+w+'').val(g)
                         
                         }
                     }
                     });
+    });
    
-    */
+    
 
     
 });

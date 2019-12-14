@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2019 at 09:21 PM
+-- Generation Time: Dec 14, 2019 at 10:37 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -36,18 +36,19 @@ CREATE TABLE `item_list` (
   `item_weight` varchar(100) NOT NULL,
   `ingredient` varchar(100) NOT NULL DEFAULT '[ - ]',
   `item_cost` varchar(100) NOT NULL,
-  `approval` int(100) NOT NULL DEFAULT 0
+  `approval` int(100) NOT NULL DEFAULT 0,
+  `out_id` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `item_list`
 --
 
-INSERT INTO `item_list` (`id`, `item_code`, `item_type`, `item_name`, `item_weight`, `ingredient`, `item_cost`, `approval`) VALUES
-(1, 'B104', 'Burger', 'Chicken Cheese Delight', '300gm', 'Chicken,Cheese,Onion,Bun', '250', 1),
-(2, 'P107', 'Pizza', 'Pan Pizza', '320gm', 'Chicken,Onion,Mushroom,Peeper,Olive,Cheese,Tomato', '400', 1),
-(3, 'B109', 'Burger', 'Chicken BBQ Burg', '300gm', 'BBQ Sauce,Chicken,Cheese,Onion,Pepperoni,Bun', '150', 0),
-(4, 'P108', 'Pizza', 'Cheese Pepperoni Blast', '500gm', 'Beef,Onion,Pepperoni,Mushroom,Sausage,Peeper,Olive,Cheese,Tomato,', '560', 1);
+INSERT INTO `item_list` (`id`, `item_code`, `item_type`, `item_name`, `item_weight`, `ingredient`, `item_cost`, `approval`, `out_id`) VALUES
+(1, 'B104', 'Burger', 'Chicken Cheese Delight', '300gm', 'Chicken,Cheese,Onion,Bun', '250', 1, ''),
+(2, 'P107', 'Pizza', 'Pan Pizza', '320gm', 'Chicken,Onion,Mushroom,Peeper,Olive,Cheese,Tomato', '400', 1, ''),
+(3, 'B109', 'Burger', 'Chicken BBQ Burg', '300gm', 'BBQ Sauce,Chicken,Cheese,Onion,Pepperoni,Bun', '150', 0, ''),
+(4, 'P108', 'Pizza', 'Cheese Pepperoni Blast', '500gm', 'Beef,Onion,Pepperoni,Mushroom,Sausage,Peeper,Olive,Cheese,Tomato,', '560', 1, '');
 
 --
 -- Indexes for dumped tables
