@@ -13,9 +13,10 @@
 
 Route::get('/home', function () {
     return view('admin.home');
-})->middleware('checkIfAdmin');
+})->name('admin.home');
 
 Route::get('/empList', 'admin\empController@getList');
+Route::get('/ajax/getValues', 'admin\AjaxController@show');
 
 Route::get('/profile', [
     'as' => 'employee.getByID',
