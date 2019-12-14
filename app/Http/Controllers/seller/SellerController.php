@@ -16,7 +16,7 @@ class SellerController extends Controller
         return view('seller.bill.invoice');
     }
 
-    public function getCost($id){
+    public function getCost(){
         
         
     }

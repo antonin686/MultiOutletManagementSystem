@@ -108,13 +108,6 @@
 <script>
 $(document).ready(function(){
 
-    $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-    });
-    //Laravel Ajax needs
-
     var i = 1 ;
     var sum= 0 ;
     var d = new Date();
