@@ -7,5 +7,7 @@ Route::get('/home', function () {
 Auth::routes();
 //Route::get('/profile', 'manager\ManagerController@manager_profile')->name('manager.profile');
 Route::get('/invoice','seller\SellerController@invoice')->name('invoice');
+Route::get('/invoice/searchAjax','seller\SellerController@getCost')->name('getCost');//ajax request
+
 Route::get('/food-items','seller\SellerController@items')->name('items');
 Route::get('/order-status','seller\SellerController@Osatus')->name('Ostatus');

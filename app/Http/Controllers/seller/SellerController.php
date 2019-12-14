@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class SellerController extends Controller
 {
     public function invoice(){
+        $e_id=auth()->user()->id;
         return view('seller.bill.invoice');
+    }
+
+    public function getCost($id){
+        
+        
     }
 
     public function items(){
