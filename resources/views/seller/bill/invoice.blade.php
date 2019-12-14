@@ -65,7 +65,7 @@
                         </div>              
                         <div class="form-group">
                             <label for="customerToken">Token Number</label>
-                            <input type="text" class="form-control" name="token">
+                            <input type="text" value="{{$newToken}}" class="form-control" name="token">
                         </div>
                         <div class="form-group">
                             <label  for="outlet">Ticket Number</label>
@@ -119,7 +119,7 @@ $(document).ready(function(){
     $('#ticket').val(d + e);
     $('#addMore').on('click',function(){
         i++;
-        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code" name="'+i+'"></td><td class="f_name">Burger</td><td> <input type="text" class="cost" id="cost'+i+'" name="cost"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
+        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code" class="'+i+'" name="code[]"></td><td class="f_name">Burger</td><td> <input type="text" class="cost" id="cost'+i+'" name="cost[]"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
         //sum.val(0) ;
     });
     $('#total').on('click',function(){
@@ -146,7 +146,7 @@ $(document).ready(function(){
    
     $(document).on('keyup','#food_code',function(e){
         var f =$(this).val();
-        var w =$(this).attr("name");
+        var w =$(this).attr("class");
         //alert(w);
         //var f = $('#food_code').val();
         //var j= $(e.currentTarget).text();
@@ -163,7 +163,7 @@ $(document).ready(function(){
                         
                         if(f_cost != null)
                         {
-                            var g = f_cost[0].item_cost;
+                            var g = f_cost.item_cost;
                             $('#cost'+w+'').val(g)
                         
                         }
