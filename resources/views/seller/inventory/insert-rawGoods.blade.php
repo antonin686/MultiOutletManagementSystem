@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- Laravel Ajax needs !-->
     <title>Insert Raw Goods</title>
 
 <!-- Custom fonts for this template-->
@@ -108,19 +109,29 @@
               <tr id="insertInventory1" >
                   <td class="ser" >1</td>
                 <td>
-                    <select class="custom-select" name="name" required>
-                        
-                            <option value="chicken wings"> Chicken Wings </option>
-                       
-                      </select>
+                    <select class="custom-select" id="prod_name" name="prod_name" required>
+                    
+                            <option value="Chicken"> Chicken</option>
+                            <option value="beef">Beef</option>
+                            <option value="potato">Potato</option>
+                            <option value="mutton">Mutton</option>   
+                    </select>
                 </td>
                 <td>
-                    <select class="custom-select" name="type" required>
-                     <option value="chicken">Chicken</option>  
+                    <select class="custom-select" id="prod_type" name="prod_type" required>
+                            
+                            <option id='chicken' value="chicken Brest"> Chicken Brest </option>
+                            <option id='chicken' value="chicken legs"> Chicken Legs </option>
+                            <option id='chicken' value="Chicken Wings"> Chicken Wings </option>
+                            <option id='chicken' value="chicken bacon"> Chicken Bacon </option>
+                            <option id='beef' value="beef steak"> Beef Steak </option>
+                            <option id='beef' value="beef bacon"> Beef Bacon </option>
+                            <option id='potato' value="potato slice"> Potato Slice </option>
+                            
                     </select>
                 </td>
                 <td><input type="text" id="datepicker" placeholder="Pick a date(dd/mm/yy)"></td>
-                <td><input type="text" id="opening1" value="{{$lastBal}}" ></td>
+                <td><input type="text" id="opening1" value="" ></td>
                 <td><input type="text" id="rec1" ></td>
                 <td><input type="text" id="total1" ></td>
                 <td><input type="text" id="exp1" ></td>
@@ -146,6 +157,7 @@ $(document).ready(function(){
   var i = 1 ;
   var D= "dd/mm/yy";
   var j = 1;
+  var f = 0;
   
   //var picker = "a";
 /*
@@ -158,6 +170,7 @@ $(document).ready(function(){
  
   $(document).on('keyup','input',function cal(){
     //var j = 1 ;
+ 
     var j = $(this).closest("tr")   // Finds the closest row <tr> 
                        .find(".ser").text();         // Gets a descendent with class=".ser" & Retrieves the text within <td>;
                        console.log(j);
@@ -196,6 +209,37 @@ $(document).ready(function(){
     var btn_rmv=$(this).attr("id");
     $('#insertInventory'+btn_rmv+'').remove();
   });
+
+  $(document).on('change','#prod_name' | '#prod_type',function(e){
+    var f =$('#prod_name').val();
+    var ft =$('#prod_type').val();
+    //console.log(ft);
+    console.log(f);
+    $.ajax({
+                    url: `/seller/insert-raw-goods/searchAjax`, 
+                    type:'GET',
+                    dataType:"json",
+                    data:{p_name:f , p_type:ft},
+                    success: (f_cost) => {
+                        console.log(f_cost);
+                        var html = '';
+                        
+                        if(f_cost != null)
+                        {
+                            var g = f_cost;
+                          
+                            $('#opening1').val(g)
+                            //console.log(gb);
+                            console.log(g);
+                        
+                        }
+                        else{
+                          $('#opening1').val(0)
+                        }
+                    }
+                    });
+  });
+  
   
 });
 </script>

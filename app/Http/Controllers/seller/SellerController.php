@@ -62,9 +62,21 @@ class SellerController extends Controller
     }
 
     public function goodsEntry(){
-        $Balid = DB::table('inventory__raw__materials')->where('product_type','Chicken')->max('id');
-        $Bal = DB::table('inventory__raw__materials')->where('id',$Balid)->get('balance');
-        return view('seller.inventory.insert-rawGoods')-> with('lastBal', $Bal);
+        
+        //return view('seller.inventory.insert-rawGoods')-> with('lastBal', $Bal); //{{$lastBal}}
+        return view('seller.inventory.insert-rawGoods');
+    }
+
+    public function goodsBal(Request $request){
+        if($request->ajax())
+        {
+            $prod_name = $request->get('p_name');
+            $prod_type = $request->get('p_type');
+            $Balid = DB::table('inventory__raw__materials')->where( 'product_name',$prod_name)->Where('product_type', $prod_type)->max('id');
+            $Bal = DB::table('inventory__raw__materials')->where('id',$Balid)->value('balance');
+            echo json_encode($Bal);
+        
+        }
     }
 
 
