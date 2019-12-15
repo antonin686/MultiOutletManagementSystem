@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Employee;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Outlet;
 use App\User;
+use DB;
+use Illuminate\Http\Request;
 
-class AjaxController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +18,25 @@ class AjaxController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.index');
+    }
+
+    public function table()
+    {
+        $employees = DB::table('employees')
+            ->join('logins', 'logins.id', '=', 'employees.log_id')
+            ->join('roles', 'roles.id', '=', 'logins.role')
+            ->where('logins.role', '<>', 1)
+            ->get();
+
+        $outlets = Outlet::all();
+
+        $tables = (object) [
+            'emps' => $employees,
+            'outlets' => $outlets,
+        ];
+
+        return view('admin.tables')->with('tables', $tables);
     }
 
     /**
@@ -45,14 +66,16 @@ class AjaxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
-        if($request->ajax())
-        {
-            $query = $request->get('query');
-            $user = Employee::all();
-            return json_encode($user);
-        }
+        $id = auth()->user()->id;
+        $user = DB::table('employees')
+            ->join('logins', 'logins.id', '=', 'employees.log_id')
+            ->join('roles', 'roles.id', '=', 'logins.role')
+            ->where('logins.id', $id)
+            ->first();
+
+        return view('admin.profile')->with('user', $user);
     }
 
     /**
@@ -73,9 +96,17 @@ class AjaxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = Employee::where('log_id', auth()->user()->id)->first();
+
+        //dd($user);
+        $user->emp_name = $request->name;
+        $user->contact = $request->contact;
+        $user->about = ($request->about == null) ? $user->about : $request->about;
+        $user->save();
+
+        return redirect()->route('admin.profile');
     }
 
     /**

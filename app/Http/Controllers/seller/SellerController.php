@@ -18,7 +18,6 @@ class SellerController extends Controller
 
     public function getCost(){
         
-        
     }
 
     public function items(){

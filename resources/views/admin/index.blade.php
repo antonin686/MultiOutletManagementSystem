@@ -1,5 +1,9 @@
 @extends('admin.layout')
 
+@section('breadcrumb')
+<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -154,6 +158,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
@@ -453,7 +458,9 @@ $(document).ready(function() {
             url: "/admin/ajax/getValues",
             method: "GET",
             dataType: "json",
-            data:{query:id},
+            data: {
+                query: id
+            },
 
             success: function(result) {
                 console.log(result);

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 use App\User;
+use App\Employee;
+use App\Outlet;
 
-class AjaxController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,14 +48,15 @@ class AjaxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        if($request->ajax())
-        {
-            $query = $request->get('query');
-            $user = Employee::all();
-            return json_encode($user);
-        }
+        $user = DB::table('employees')
+            ->join('logins', 'logins.id', '=', 'employees.log_id')
+            ->join('roles', 'roles.id', '=', 'logins.role')
+            ->where('employees.id', $id)
+            ->first();
+
+        return view('admin.profile')->with('user', $user);
     }
 
     /**
@@ -73,9 +77,16 @@ class AjaxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        //
+        $emp = Employee::find($id);
+        $emp->emp_name = $request->name;
+        $emp->contact = $request->contact;
+        $emp->about = ($request->about == null) ? $user->about : $request->about;
+        $emp->save();
+
+        return Redirect()->route('employee.show',['id' => $id]);
     }
 
     /**
