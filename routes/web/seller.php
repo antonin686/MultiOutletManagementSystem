@@ -16,3 +16,4 @@ Route::get('/order-status','seller\SellerController@Osatus')->name('Ostatus');
 
 Route::get('/insert-raw-goods','seller\SellerController@goodsEntry')->name('goodsEntry');
 Route::get('/insert-raw-goods/searchAjax','seller\SellerController@goodsBal')->name('getGoodsBal');
+Route::post('/insert-raw-goods','seller\SellerController@submitRawGoods');

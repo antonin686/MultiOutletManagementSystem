@@ -12,13 +12,10 @@
   <title>Seller</title>
 
   <!-- Custom fonts for this template-->
-  <link href="/custom/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/seller/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-  <!-- Page level plugin CSS-->
-  <link href="/custom/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="/custom/css/sb-admin.css" rel="stylesheet">
+  <link href="/seller/bootstrap/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/seller/css/seller.css" rel="stylesheet">
 
 </head>
 
@@ -28,9 +25,6 @@
 
     <a class="navbar-brand mr-1" href="index.html">Seller</a>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
 
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -77,202 +71,15 @@
 
   <div id="wrapper">
 
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav" style="">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-        <i class="fas fa-desktop"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="far fa-clipboard"></i>
-          <span> Attendance</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="register.html">View Attendance</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-store"></i>
-            <span>Outlet</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="login.html">My Outlet</a>
-          </div>
-        </li>
-     
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-              <i class="fas fa-chair"></i>
-              <span>Seat Booking</span>
-            </a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-              <i class="fas fa-sort-alpha-up"></i>
-              <span>Orders</span>
-            </a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('manager.profile')}}">
-              <i class="fas fa-user-circle"></i>
-              <span>User Profile</span>
-            </a>
-        </li>
-    </ul>
 
-    <div id="content-wrapper" style="background:-webkit-repeating-linear-gradient(90deg,white,cyan,white)">
+    <div id="content-wrapper" style="background:-webkit-repeating-linear-gradient(90deg,white,violet,white)">
       <div class="container-fluid col-sm-10 offset-sm-1">
       <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Overview</li>
           </ol>
   
-          <!-- Icon Cards-->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-file-invoice-dollar"></i>
-                  </div>
-                  <div class="mr-5">Place an Order</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="/seller/invoice">
-                  <span class="float-left">Click to Order</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-warning o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-pizza-slice"></i>
-                  </div>
-                  <div class="mr-5">View Food Items</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="/seller/food-items">
-                  <span class="float-left">Item List</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-success o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                  </div>
-            <div class="mr-5">View Inventory</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-danger o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-cart-arrow-down"></i>
-                  </div>
-                  <div class="mr-5">Raw Goods Data Entry</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="/seller/insert-raw-goods">
-                  <span class="float-left">Insert new data</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-success o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-business-time"></i>
-                  </div>
-            <div class="mr-5">Order Status</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="/seller/order-status">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-danger o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-wine-bottle"></i>
-                  <i class="fas fa-cheese"></i>
-                  </div>
-                  <div class="mr-5">Packed Ingredient Data Entry</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">Insert new data</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-history"></i>
-                  </div>
-                  <div class="mr-5">Order History</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">Click to see</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-warning o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                  <i class="fas fa-sticky-note"></i>
-                  </div>
-                  <div class="mr-5">TO DO LIST...</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">ADD Note</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            
-          </div>
-  
-         
-
 
      
 
@@ -302,6 +109,86 @@
       </div>
     </div>
   </div>
+
+<section class="after-loop">
+  <div class="container">
+  <div class="row">
+  <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+  <a href="/seller/invoice" class="card text-white bg-primary o-hidden  after-loop-item card border-0 card-templates shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>Place an Order</h4>
+  <p class="w-75">[Click to order] </br> Make a n Invoice and Print a recipt </p>
+  <div class="card-body-icon">
+      <i class="fas fa-file-invoice-dollar"></i>
+  </div>
+
+  </div>
+  </a>
+  </div>
+  <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+  <a href="/seller/food-items" class="card text-white bg-warning o-hidden after-loop-item card border-0 card-snippets shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>View Food Items</h4>
+  <p class="w-75">[Click to view] </br> All available food items are here [Search] </p>
+  <div class="card-body-icon">
+        <i class="fas fa-pizza-slice"></i>
+  </div>
+
+  </div>
+  </a>
+  </div>
+  <div class="col-lg-4 col-md-8 mx-auto">
+  <a href="/guides/" class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>View Inventory</h4>
+  <p class="w-75">[Click to view] </br> All Raw goods & food ingredients are here [Catagory] </p>
+    <div class="card-body-icon">
+    <i class="fas fa-fw fa-shopping-cart"></i>
+    </div>
+  </div>
+  </a>
+  </div>
+  
+  <div class="col-lg-4 col-md-8 mx-auto" style="margin-top:1em;" >
+  <a href="/seller/order-status" class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>Order Status</h4>
+  <p class="w-75">[Click to view] </br>All Pending Orders are here. Click to see the pending orders</p>
+    <div class="card-body-icon">
+    <i class="fas fa-business-time"></i>
+    </div>
+  </div>
+  </a>
+  </div>
+
+  <div class="col-lg-4 col-md-8 mx-auto" style="margin-top:1em;" >
+  <a href="/seller/insert-raw-goods" class="card text-white bg-danger o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>Raw Goods Data Entry</h4>
+  <p class="w-75">[Click to Visit] </br> Data entry point of all Raw Goods</p>
+    <div class="card-body-icon">
+    <i class="fas fa-cart-arrow-down"></i>
+    </div>
+  </div>
+  </a>
+  </div>
+
+  <div class="col-lg-4 col-md-8 mx-auto" style="margin-top:1em;" >
+  <a href="/guides/" class="card text-white bg-primary o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <div class="card-body d-flex align-items-end flex-column text-right">
+  <h4>Packed Food Ingredient Data</h4>
+  <p class="w-75">Data entry point of all Raw Goods</p>
+    <div class="card-body-icon">
+    <i class="fas fa-wine-bottle"></i>
+    <i class="fas fa-cheese"></i>
+
+    </div>
+  </div>
+  </a>
+  </div>
+
+  
+</select>
 
   <!-- Bootstrap core JavaScript-->
   <script src="/custom/vendor/jquery/jquery.min.js"></script>

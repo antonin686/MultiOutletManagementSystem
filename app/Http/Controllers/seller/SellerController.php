@@ -79,6 +79,26 @@ class SellerController extends Controller
         }
     }
 
+    public function submitRawGoods(Request $request){
+        //dd($request->all());
+        
+        for ($i=0; $i < count($request->bal); $i++) { 
+            DB::table('inventory__raw__materials')->insert([
+                    //col=======value
+                    'product_name' => $request->prod_name[$i],
+                    'product_type' => $request->prod_type[$i],
+                    'date' => $request->date[$i],
+                    'opening' => $request->opening[$i],
+                    'receive' => $request->rec[$i],
+                    'total' => $request->total[$i],
+                    'exp' => $request->exp[$i],
+                    'balance' => $request->bal[$i]
+                    
+                ]);
+        }
+        dd($request->bal[0]);
+    }
+
 
     
 }
