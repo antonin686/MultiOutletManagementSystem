@@ -61,6 +61,12 @@ class SellerController extends Controller
         return view('seller.ingredient.crud');
     }
 
+    public function goodsEntry(){
+        $Balid = DB::table('inventory__raw__materials')->where('product_type','Chicken')->max('id');
+        $Bal = DB::table('inventory__raw__materials')->where('id',$Balid)->get('balance');
+        return view('seller.inventory.insert-rawGoods')-> with('lastBal', $Bal);
+    }
+
 
     
 }

@@ -191,7 +191,7 @@
                   </div>
                   <div class="mr-5">Raw Goods Data Entry</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="/seller/insert-raw-goods">
                   <span class="float-left">Insert new data</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
