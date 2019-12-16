@@ -48,7 +48,7 @@ class SellerController extends Controller
                     
                 ]);
         }
-        //dd($request->cost[0]);
+        return redirect()->route('Ostatus');
     }
 
 
