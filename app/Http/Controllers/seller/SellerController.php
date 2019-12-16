@@ -109,7 +109,7 @@ class SellerController extends Controller
                     
                 ]);
         }
-        dd($request->bal[0]);
+        return redirect()->route('inventory');
     }
 
     public function packedFood(){
@@ -135,7 +135,7 @@ class SellerController extends Controller
                     
                 ]);
         }
-        return view('seller.inventory.view-inventory');
+        return redirect()->route('inventory');
     }
 
     public function viewInventory(){
