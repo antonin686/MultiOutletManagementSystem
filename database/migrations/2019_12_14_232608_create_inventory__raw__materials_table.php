@@ -23,6 +23,7 @@ class CreateInventoryRawMaterialsTable extends Migration
             $table->string('total');
             $table->string('exp');
             $table->string('balance');
+            $table->bigInteger('out_id');
         });
     }
 

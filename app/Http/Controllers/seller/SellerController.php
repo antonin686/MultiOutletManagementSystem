@@ -81,7 +81,9 @@ class SellerController extends Controller
 
     public function submitRawGoods(Request $request){
         //dd($request->all());
-        
+        $getUser=auth()->user()->id;
+        $outlet = Employee::where('log_id', $getUser)->first()->out_id;
+        //dd($user);
         for ($i=0; $i < count($request->bal); $i++) { 
             DB::table('inventory__raw__materials')->insert([
                     //col=======value
@@ -92,7 +94,8 @@ class SellerController extends Controller
                     'receive' => $request->rec[$i],
                     'total' => $request->total[$i],
                     'exp' => $request->exp[$i],
-                    'balance' => $request->bal[$i]
+                    'balance' => $request->bal[$i],
+                    'out_id' => $outlet
                     
                 ]);
         }
