@@ -109,7 +109,7 @@
               <tr id="insertInventory1" >
                   <td class="ser" >1</td>
                 <td>
-                    <select class="custom-select" id="prod_name1" name="prod_name[]" required>
+                    <select class="1" id="prod_name1" name="prod_name[]" required>
                     
                             <option value="Chicken"> Chicken</option>
                             <option value="beef">Beef</option>
@@ -118,7 +118,7 @@
                     </select>
                 </td>
                 <td>
-                    <select class="custom-select" id="prod_type1" name="prod_type[]" required>
+                    <select class="1" id="prod_type1" name="prod_type[]" required>
                             
                             <option id='chicken' value="chicken Brest"> Chicken Brest </option>
                             <option id='chicken' value="chicken legs"> Chicken Legs </option>
@@ -200,7 +200,7 @@ $(document).ready(function(){
     
     var D = $('#datepicker').val(); //clone Date
     i++
-    $('#tab-body').append('<tr id="insertInventory'+i+'"> <td class="ser" id="getSerial" >'+i+'</td> <td><select class="prod_name'+i+'" id="prod_name" name="prod_name[]" required><option value="Chicken"> Chicken</option><option value="beef">Beef</option><option value="potato">Potato</option><option value="mutton">Mutton</option></select></td><td><select class="'+i+'" id="prod_type" name="prod_type[]" required><option id="chicken" value="chicken Brest"> Chicken Brest </option><option id="chicken" value="chicken legs"> Chicken Legs </option><option id="chicken" value="Chicken Wings"> Chicken Wings </option><option id="chicken" value="chicken bacon"> Chicken Bacon </option><option id="beef" value="beef steak"> Beef Steak </option><option id="beef" value="beef bacon"> Beef Bacon </option><option id="potato" value="potato slice"> Potato Slice </option></select></td><td><input type="text" name="date[]" id="datepickerClone" placeholder="Pick a date" value="'+D+'" ></td><td><input type="text" id="opening'+i+'" name="opening[]" ></td><td><input type="text" id="rec'+i+'" name="rec[]" ></td><td><input type="text" id="total'+i+'" name="total[]" ></td><td><input type="text" id="exp'+i+'" name="exp[]" ></td><td><input type="text" id="bal'+i+'" name="bal[]" ></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><b>-</b></button></td></tr>');
+    $('#tab-body').append('<tr id="insertInventory'+i+'"> <td class="ser" id="getSerial" >'+i+'</td> <td><select class="prod_name'+i+'" id="prod_name'+i+'" name="prod_name[]" required><option value="Chicken"> Chicken</option><option value="beef">Beef</option><option value="potato">Potato</option><option value="mutton">Mutton</option></select></td><td><select class="'+i+'" id="prod_type'+i+'" name="prod_type[]" required><option id="chicken" value="chicken Brest"> Chicken Brest </option><option id="chicken" value="chicken legs"> Chicken Legs </option><option id="chicken" value="Chicken Wings"> Chicken Wings </option><option id="chicken" value="chicken bacon"> Chicken Bacon </option><option id="beef" value="beef steak"> Beef Steak </option><option id="beef" value="beef bacon"> Beef Bacon </option><option id="potato" value="potato slice"> Potato Slice </option></select></td><td><input type="text" name="date[]" id="datepickerClone" placeholder="Pick a date" value="'+D+'" ></td><td><input type="text" id="opening'+i+'" name="opening[]" ></td><td><input type="text" id="rec'+i+'" name="rec[]" ></td><td><input type="text" id="total'+i+'" name="total[]" ></td><td><input type="text" id="exp'+i+'" name="exp[]" ></td><td><input type="text" id="bal'+i+'" name="bal[]" ></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><b>-</b></button></td></tr>');
     $( "#datepicker" ).datepicker(); 
    
   });
@@ -210,17 +210,13 @@ $(document).ready(function(){
     $('#insertInventory'+btn_rmv+'').remove();
   });
 
-  $(document).on('change','#prod_type',function(e){
+  $(document).on('change','select[name="prod_type[]"]',function(e){
     ref =$(this).attr("class");
-    console.log(ref);
-  });
-
-  $(document).on('change','#prod_name' | '#prod_type',function(e){
-    //ver u = 
-    var f =$('#prod_name1').val();
-    var ft =$('#prod_type1').val();
-    //console.log(ft);
-    console.log(ref);
+   
+    var f =$('#prod_name'+ref+'').val();
+    var ft =$('#prod_type'+ref+'').val();
+    console.log(ft);
+    console.log(f);
     $.ajax({
                     url: `/seller/insert-raw-goods/searchAjax`, 
                     type:'GET',
@@ -234,13 +230,13 @@ $(document).ready(function(){
                         {
                             var g = f_cost;
                           
-                            $('#opening1').val(g)
+                            $('#opening'+ref+'').val(g)
                             //console.log(gb);
-                            //console.log(g);
+                            console.log(g);
                         
                         }
                         else{
-                          $('#opening1').val(0)
+                          $('#opening'+ref+'').val(0)
                         }
                     }
                     });

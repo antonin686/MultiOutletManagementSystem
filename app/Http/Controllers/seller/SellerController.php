@@ -70,8 +70,8 @@ class SellerController extends Controller
     public function goodsBal(Request $request){
         if($request->ajax())
         {
-            $prod_name = $request->get('p_name');
-            $prod_type = $request->get('p_type');
+            $prod_name[] = $request->get('p_name');
+            $prod_type[] = $request->get('p_type');
             $Balid = DB::table('inventory__raw__materials')->where( 'product_name',$prod_name)->Where('product_type', $prod_type)->max('id');
             $Bal = DB::table('inventory__raw__materials')->where('id',$Balid)->value('balance');
             echo json_encode($Bal);
