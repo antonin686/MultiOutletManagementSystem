@@ -119,7 +119,7 @@ $(document).ready(function(){
     $('#ticket').val(d + e);
     $('#addMore').on('click',function(){
         i++;
-        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code" class="'+i+'" name="code[]"></td><td class="f_name">Burger</td><td> <input type="text" class="cost" id="cost'+i+'" name="cost[]"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
+        $('#orders').append('<tr id="orderedItems'+i+'" ><td class="f_code"><input type="text" id="food_code" class="'+i+'" name="code[]"></td><td class="f_name "> <input type="text" id="f_name'+i+'" name="f_name[]"> </td><td> <input type="text" class="cost" id="cost'+i+'" name="cost[]"> </td><td><button type="button" id="'+i+'" class="btn btn-danger btn_remove"><b>Remove</b></button></td></tr>');
         //sum.val(0) ;
     });
     $('#total').on('click',function(){
@@ -164,7 +164,9 @@ $(document).ready(function(){
                         if(f_cost != null)
                         {
                             var g = f_cost.item_cost;
-                            $('#cost'+w+'').val(g)
+                            var fn = f_cost.item_name;
+                            $('#cost'+w+'').val(g);
+                            $('#f_name'+w+'').val(fn)
                         
                         }
                     }

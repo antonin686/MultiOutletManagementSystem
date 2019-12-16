@@ -138,7 +138,7 @@
   </a>
   </div>
   <div class="col-lg-4 col-md-8 mx-auto">
-  <a href="/guides/" class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <a href="/seller/inventory" class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
   <div class="card-body d-flex align-items-end flex-column text-right">
   <h4>View Inventory</h4>
   <p class="w-75">[Click to view] </br> All Raw goods & food ingredients are here [Catagory] </p>
@@ -150,7 +150,7 @@
   </div>
   
   <div class="col-lg-4 col-md-8 mx-auto" style="margin-top:1em;" >
-  <a href="/seller/order-status" class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <a href="/seller/order-status" target="_blank"  class="card text-white bg-success o-hidden after-loop-item card border-0 card-guides shadow-lg">
   <div class="card-body d-flex align-items-end flex-column text-right">
   <h4>Order Status</h4>
   <p class="w-75">[Click to view] </br>All Pending Orders are here. Click to see the pending orders</p>
@@ -174,9 +174,9 @@
   </div>
 
   <div class="col-lg-4 col-md-8 mx-auto" style="margin-top:1em;" >
-  <a href="/guides/" class="card text-white bg-primary o-hidden after-loop-item card border-0 card-guides shadow-lg">
+  <a href="/seller/packed-food-ingredient" class="card text-white bg-primary o-hidden after-loop-item card border-0 card-guides shadow-lg">
   <div class="card-body d-flex align-items-end flex-column text-right">
-  <h4>Packed Food Ingredient Data</h4>
+  <h4>Packed Food Ingredient Data Entry</h4>
   <p class="w-75">Data entry point of all Raw Goods</p>
     <div class="card-body-icon">
     <i class="fas fa-wine-bottle"></i>
