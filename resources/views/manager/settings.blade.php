@@ -14,7 +14,8 @@
     </div>
 @endif
 
-<form method="POST" class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.7;background:white" action="{{route('managerProfile.password')}}">
+<form method="POST" class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.9;background:white" action="{{route('managerProfile.password')}}">
+    @csrf
         <div class="form-group" style="color:black">
             <label>Enter Current Password</label>
             <input style="color:black" type="password" class="form-control form-control-lg" id="oldpass" name="current_password" aria-describedby="e" placeholder="Enter Current Password" value="{{old('current_password')}}">
