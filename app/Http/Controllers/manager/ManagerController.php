@@ -17,7 +17,7 @@ class ManagerController extends Controller
                  ->join('logins', 'employees.log_id', '=', 'logins.id')
                  ->join('roles', 'logins.role', '=', 'roles.id')
                  ->join('outlets', 'employees.out_id', '=', 'outlets.id')
-                 ->select('logins.username','logins.password', 'roles.name as role','employees.name as mname', 'employees.contact', 'employees.salary', 'employees.img','outlets.name as out')
+                 ->select('logins.username','logins.password', 'roles.role_name as role','employees.emp_name as mname', 'employees.contact', 'employees.salary', 'employees.img','outlets.out_name as out')
                  ->where('employees.log_id', '=', $id)
                  ->get();
         //return $data;
@@ -30,7 +30,7 @@ class ManagerController extends Controller
                  ->join('logins', 'employees.log_id', '=', 'logins.id')
                  ->join('roles', 'logins.role', '=', 'roles.id')
                  ->join('outlets', 'employees.out_id', '=', 'outlets.id')
-                 ->select('logins.username','logins.password', 'roles.name as role','employees.name as mname', 'employees.contact', 'employees.salary', 'employees.img','outlets.name as out')
+                 ->select('logins.username','logins.password', 'roles.role_name as role','employees.emp_name as mname', 'employees.contact', 'employees.salary', 'employees.img','outlets.out_name as out')
                  ->where('employees.log_id', '=', $id)
                  ->get();
         
@@ -44,7 +44,7 @@ class ManagerController extends Controller
         ]);
         $id = Auth::user()->id;
         $user = Employee::all()->where('log_id',$id)->first();
-        $user->name =  $request->get('name');
+        $user->emp_name =  $request->get('name');
 		$user->contact =  $request->get('contact');
         $user->save();
         return redirect()->route('manager.profile');
@@ -112,7 +112,7 @@ class ManagerController extends Controller
         ->get();
 
         Employee::create([
-            'name' => $request->name,
+            'emp_name' => $request->name,
             'contact' => $request->contact,
             'salary' => $request->salary,
             'out_id' => $data[0]->id,
@@ -135,7 +135,7 @@ class ManagerController extends Controller
         
         $data = DB::table('employees')
                  ->join('outlets', 'employees.out_id', '=', 'outlets.id')
-                 ->select('employees.id','employees.name','employees.contact','employees.salary')
+                 ->select('employees.id','employees.emp_name','employees.contact','employees.salary')
                  ->where('employees.log_id', '!=', $id)
                  ->where('employees.out_id', '=', $outlet[0]->id)
                  ->get();
@@ -160,7 +160,7 @@ class ManagerController extends Controller
             'salary' => 'required|numeric',
         ]);
         $user = Employee::find($request->employee_id);
-        $user->name = $request->name;
+        $user->emp_name = $request->name;
         $user->contact = $request->contact;
         $user->salary = $request->salary;
         $user->save();
@@ -174,7 +174,7 @@ class ManagerController extends Controller
     {
         $info = DB::table('employees')
         ->join('logins', 'employees.log_id', '=', 'logins.id')
-        ->select('employees.name','employees.contact','employees.salary','employees.img','employees.created_at','logins.username')
+        ->select('employees.emp_name','employees.contact','employees.salary','employees.img','employees.created_at','logins.username')
         ->where('employees.id', '=', $request->employee_id)
         ->get();
 

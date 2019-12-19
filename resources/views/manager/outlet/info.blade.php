@@ -4,7 +4,7 @@
 <div class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.9;background:white">
     <div class="form-group" style="color:black">
         <label>Outlet Name</label>
-        <input style="color:black" type="text" class="form-control form-control-lg" id="name" aria-describedby="e" placeholder="" value="{{$data[0]->name}}" readonly>
+        <input style="color:black" type="text" class="form-control form-control-lg" id="name" aria-describedby="e" placeholder="" value="{{$data[0]->out_name}}" readonly>
     </div>
     <div class="form-group" style="color:black">
         <label>Outlet Location</label>

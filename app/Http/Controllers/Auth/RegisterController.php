@@ -68,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //print_r($data);
-        echo $data['role'];
+        //echo $data['role'];
         $usr = User::create([
             
             'username' => $data['username'],
@@ -77,7 +77,7 @@ class RegisterController extends Controller
         ]);
 
         Employee::create([
-            'name' => $data['name'],
+            'emp_name' => $data['name'],
             'contact' => $data['contact'],
             'salary' => $data['salary'],
             'out_id' => $data['out_id'],
@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'log_id' => $usr->id,
         ]);
 
-        return $usr;
+        //return $usr;
     }
 
     public function register(Request $request)

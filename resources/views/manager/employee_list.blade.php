@@ -33,7 +33,7 @@
                 @foreach($data as $dt)
                 <tr class="bg-light" id="{{$dt->id}}">
                     <th scope="row"> {{$dt->id}} </th>
-                    <td class="profile_view">{{$dt->name}}</td>
+                    <td class="profile_view">{{$dt->emp_name}}</td>
                     <td>{{$dt->contact}}</td>
                     <td>
                         <input type="button" name="edit" value="Info" id="{{$dt->id}}" class="btn btn-info emp_info"></input>
@@ -175,7 +175,7 @@ $(document).on('click', '.edit_data', function(){
                     //$leads = json_decode($leads, true);
                     //dd($leads);
                      //console.log(data);
-                     $('#name').val(data['name']);  
+                     $('#name').val(data['emp_name']);  
                      $('#contact').val(data['contact']);  
                      $('#salary').val(data['salary']);  
                      $("#img").attr("src", "../".concat(data['img'])); 
@@ -197,7 +197,7 @@ $(document).on('click', '.edit_data', function(){
                     //$leads = json_decode($leads, true);
                     //dd($leads);
                      console.log(data[0]);
-                     $('#ename').val(data[0]['name']);  
+                     $('#ename').val(data[0]['emp_name']);  
                      $('#eusername').val(data[0]['username']);  
                      $('#econtact').val(data[0]['contact']);  
                      $('#esalary').val(data[0]['salary']);  
