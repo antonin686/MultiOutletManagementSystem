@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/home', function () {
-    return view('admin.home');
-})->middleware('checkIfAdmin');
 
-Route::get('/empList', 'admin\empController@getList');
+Route::get('/home', 'admin\AdminController@index')->name('admin.index');
+Route::get('/profile', 'admin\AdminController@show')->name('admin.profile');
+Route::post('/profile', 'admin\AdminController@update');
 
-Route::get('/profile', [
-    'as' => 'employee.getByID',
-    'uses' => 'admin\empController@getProfile',
-]);
+Route::get('/tables', 'admin\AdminController@table')->name('admin.tables');
 
+Route::get('/ajax/getValues', 'admin\AjaxController@show');
 
+Route::get('/employee/{id}', 'admin\EmployeeController@show')->name('employee.show');
+Route::post('/employee/{id}', 'admin\EmployeeController@update');
