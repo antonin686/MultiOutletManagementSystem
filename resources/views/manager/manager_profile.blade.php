@@ -1,7 +1,7 @@
 @extends('manager.base')
 
 @section('content')
-<form method="POST" class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.7;background:white">
+<div class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.9;background:white">
         <div class="form-group" style="color:black">
             <label>Name</label>
             <input style="color:black" type="text" class="form-control form-control-lg" id="name" aria-describedby="e" placeholder="" value="{{$data[0]->mname}}" readonly>
@@ -25,6 +25,6 @@
         <div class="form-group" style="color:black">
             <label>Outlet</label>
             <input style="color:black" type="text" class="form-control form-control-lg" id="outlet" aria-describedby="e" placeholder="" value="{{$data[0]->out}}" readonly>
-            </div>
-    </form>  
+        </div>
+    </div>  
 @endsection

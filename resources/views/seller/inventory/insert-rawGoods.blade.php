@@ -86,7 +86,7 @@
   
 <!--Body-->
   <div style="background: rgb(254, 201, 154, .8) ;">
-    <form action="">
+    <form method="POST">
 
     {{csrf_field()}}
         <table id="rawGoodsInsert" border="1px" align="center" >
@@ -109,7 +109,7 @@
               <tr id="insertInventory1" >
                   <td class="ser" >1</td>
                 <td>
-                    <select class="custom-select" id="prod_name" name="prod_name" required>
+                    <select class="1" id="prod_name1" name="prod_name[]" required>
                     
                             <option value="Chicken"> Chicken</option>
                             <option value="beef">Beef</option>
@@ -118,7 +118,7 @@
                     </select>
                 </td>
                 <td>
-                    <select class="custom-select" id="prod_type" name="prod_type" required>
+                    <select class="1" id="prod_type1" name="prod_type[]" required>
                             
                             <option id='chicken' value="chicken Brest"> Chicken Brest </option>
                             <option id='chicken' value="chicken legs"> Chicken Legs </option>
@@ -130,12 +130,12 @@
                             
                     </select>
                 </td>
-                <td><input type="text" id="datepicker" placeholder="Pick a date(dd/mm/yy)"></td>
-                <td><input type="text" id="opening1" value="" ></td>
-                <td><input type="text" id="rec1" ></td>
-                <td><input type="text" id="total1" ></td>
-                <td><input type="text" id="exp1" ></td>
-                <td><input type="text" id="bal1" ></td>
+                <td><input type="text" name=date[] id="datepicker" placeholder="Pick a date(dd/mm/yy)"></td>
+                <td><input type="text" id="opening1" name="opening[]" ></td>
+                <td><input type="text" id="rec1"name="rec[]" ></td>
+                <td><input type="text" id="total1" name="total[]" ></td>
+                <td><input type="text" id="exp1" name="exp[]"></td>
+                <td><input type="text" id="bal1" name="bal[]" ></td>
                 <td><button type="button" name="addMore" id="addMore" class="btn btn-success btn_add"><b>+</b></button></td>
               </tr>
             </tbody>
@@ -175,7 +175,7 @@ $(document).ready(function(){
                        .find(".ser").text();         // Gets a descendent with class=".ser" & Retrieves the text within <td>;
                        console.log(j);
     //var k=$('td').attr("id");
-    
+    var ref=0;
     var a=$('#opening'+j).val();
     var b=$('#rec'+j).val();
     var c=$('#exp'+j).val();
@@ -200,7 +200,7 @@ $(document).ready(function(){
     
     var D = $('#datepicker').val(); //clone Date
     i++
-    $('#tab-body').append('<tr id="insertInventory'+i+'"> <td class="ser" >'+i+'</td> <td><select class="custom-select" name="name" required><% for(var i=0; i < itemList.length; i++) {%><option value="<%= itemList[i].item_type %>"> <%= itemList[i].product_name %> </option><% } %></select></td><td><select class="custom-select" name="type" required><% for(var i=0; i < itemList.length; i++) {%><option value="<%= itemList[i].item_type %>"> <%= itemList[i].product_type %> </option><% } %></select></td><td><input type="text" id="datepickerClone" placeholder="Pick a date" value="'+D+'" ></td><td><input type="text" id="opening'+i+'" ></td><td><input type="text" id="rec'+i+'" ></td><td><input type="text" id="total'+i+'" ></td><td><input type="text" id="exp'+i+'" ></td><td><input type="text" id="bal'+i+'"></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><b>-</b></button></td></tr>');
+    $('#tab-body').append('<tr id="insertInventory'+i+'"> <td class="ser" id="getSerial" >'+i+'</td> <td><select class="prod_name'+i+'" id="prod_name'+i+'" name="prod_name[]" required><option value="Chicken"> Chicken</option><option value="beef">Beef</option><option value="potato">Potato</option><option value="mutton">Mutton</option></select></td><td><select class="'+i+'" id="prod_type'+i+'" name="prod_type[]" required><option id="chicken" value="chicken Brest"> Chicken Brest </option><option id="chicken" value="chicken legs"> Chicken Legs </option><option id="chicken" value="Chicken Wings"> Chicken Wings </option><option id="chicken" value="chicken bacon"> Chicken Bacon </option><option id="beef" value="beef steak"> Beef Steak </option><option id="beef" value="beef bacon"> Beef Bacon </option><option id="potato" value="potato slice"> Potato Slice </option></select></td><td><input type="text" name="date[]" id="datepickerClone" placeholder="Pick a date" value="'+D+'" ></td><td><input type="text" id="opening'+i+'" name="opening[]" ></td><td><input type="text" id="rec'+i+'" name="rec[]" ></td><td><input type="text" id="total'+i+'" name="total[]" ></td><td><input type="text" id="exp'+i+'" name="exp[]" ></td><td><input type="text" id="bal'+i+'" name="bal[]" ></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><b>-</b></button></td></tr>');
     $( "#datepicker" ).datepicker(); 
    
   });
@@ -210,10 +210,12 @@ $(document).ready(function(){
     $('#insertInventory'+btn_rmv+'').remove();
   });
 
-  $(document).on('change','#prod_name' | '#prod_type',function(e){
-    var f =$('#prod_name').val();
-    var ft =$('#prod_type').val();
-    //console.log(ft);
+  $(document).on('change','select[name="prod_type[]"]',function(e){
+    ref =$(this).attr("class");
+   
+    var f =$('#prod_name'+ref+'').val();
+    var ft =$('#prod_type'+ref+'').val();
+    console.log(ft);
     console.log(f);
     $.ajax({
                     url: `/seller/insert-raw-goods/searchAjax`, 
@@ -221,20 +223,20 @@ $(document).ready(function(){
                     dataType:"json",
                     data:{p_name:f , p_type:ft},
                     success: (f_cost) => {
-                        console.log(f_cost);
+                        //console.log(f_cost);
                         var html = '';
                         
                         if(f_cost != null)
                         {
                             var g = f_cost;
                           
-                            $('#opening1').val(g)
+                            $('#opening'+ref+'').val(g)
                             //console.log(gb);
                             console.log(g);
                         
                         }
                         else{
-                          $('#opening1').val(0)
+                          $('#opening'+ref+'').val(0)
                         }
                     }
                     });

@@ -10,12 +10,14 @@
   <meta name="author" content="">
 
   <title>{{$title}}</title>
+  <link rel="icon" type="image/gif/png" href="{{asset('/images/download.png')}}">
 
   <!-- Custom fonts for this template-->
   <link href="/custom/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
   <link href="/custom/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
   <!-- Custom styles for this template-->
   <link href="/custom/css/sb-admin.css" rel="stylesheet">
@@ -26,7 +28,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">{{$title}}</a>
+    <span class="navbar-brand mr-1" href="index.html">{{$title}}</span>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -70,7 +72,7 @@
           <a class="dropdown-item" href="{{route('managerProfile.edit')}}">Edit Profile</a>
           <a class="dropdown-item" href="{{route('managerProfile.settings')}}">Settings</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
+          <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
     </ul>
@@ -82,7 +84,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav" style="">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/manager/home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -103,8 +105,8 @@
             <span>Outlet</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="login.html">My Outlet</a>
-            <a class="dropdown-item" href="register.html">Edit Outlet</a>
+            <a class="dropdown-item" href="{{route('outletInfo')}}">My Outlet</a>
+            <a class="dropdown-item" href="{{route('designOutlet')}}">Design Outlet</a>
           </div>
         </li>
       <li class="nav-item dropdown">
@@ -113,8 +115,8 @@
             <span>Manage Employee</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="login.html">Add Employee</a>
-            <a class="dropdown-item" href="register.html">Employee List</a>
+            <a class="dropdown-item" href="{{route('addEmployeePage')}}">Add Employee</a>
+            <a class="dropdown-item" href="{{route('employeeList')}}">Employee List</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -123,15 +125,15 @@
               <span>Inventory</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-              <a class="dropdown-item" href="login.html">Add Catagory</a>
-              <a class="dropdown-item" href="register.html">Add Product</a>
-              <a class="dropdown-item" href="register.html">Product List</a>
+              <a class="dropdown-item" href="{{route('ProductTypePage')}}">Add Catagory</a>
+              <a class="dropdown-item" href="{{route('addProductPage')}}">Add Product</a>
+              <a class="dropdown-item" href="{{route('productList')}}">Product List</a>
           </div>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-              <i class="fas fa-chair"></i>
-              <span>Seat Booking</span>
+            <a class="nav-link" href="{{route('booking')}}">
+              <i class="fas fa-table"></i>
+              <span>Seat Reservation</span>
             </a>
         </li>
         <li class="nav-item active">
@@ -152,13 +154,16 @@
       <div class="container-fluid col-sm-10 offset-sm-1">
           @yield('content')
       </div>
+      <div class="container-fluid col-sm-12">
+          @yield('booking')
+      </div>
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
       <footer class="sticky-footer" style="">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
+            <span>Copyright © Multi Outlet Management System 2019</span>
           </div>
         </div>
       </footer>
@@ -187,7 +192,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="/logout">Logout</a>
+          <a class="btn btn-primary" href="/manager/logout">Logout</a>
         </div>
       </div>
     </div>
@@ -204,6 +209,7 @@
   <script src="/custom/vendor/chart.js/Chart.min.js"></script>
   <script src="/custom/vendor/datatables/jquery.dataTables.js"></script>
   <script src="/custom/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="/custom/js/sb-admin.min.js"></script>
@@ -216,6 +222,8 @@
   <script src="/custom/js/demo/chart-area-demo.js"></script>
   <script src="/custom/js/demo/chart-bar-demo.js"></script>
   <script src="/custom/js/demo/chart-pie-demo.js"></script>
+
+  @yield('script')
 
 </body>
 

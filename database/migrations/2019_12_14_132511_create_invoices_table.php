@@ -24,6 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->string('food_cost');
             $table->bigInteger('out_id');
             $table->string('e_username');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

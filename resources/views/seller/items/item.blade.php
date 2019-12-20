@@ -17,8 +17,8 @@
     <!-- Custom styles for this template-->
     <link href="/custom/css/sb-admin.css" rel="stylesheet">
     <!-- Custom added jQuery library for this template-->
-    <script src="/custom/jQuery/jquery-3.4.1.min.js"></script>
-    <script src="/custom/jQuery/dataTable.min.js"></script>
+    <script src="/seller/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="/seller/jQuery/dataTable.min.js"></script>
 
     <style>
     body{

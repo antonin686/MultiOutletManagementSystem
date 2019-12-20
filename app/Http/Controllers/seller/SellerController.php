@@ -41,14 +41,14 @@ class SellerController extends Controller
                     'token' => $request->token,
                     'ticket' => $request->ticket,
                     'food_code' => $request->code[$i],
-                    'food_name' => "BRA",
+                    'food_name' => $request->f_name[$i],
                     'food_cost' => $request->cost[$i],
                     'out_id' => $user->out_id,
                     'e_username' => auth()->user()->username
                     
                 ]);
         }
-        //dd($request->cost[0]);
+        return redirect()->route('Ostatus');
     }
 
 
@@ -58,7 +58,17 @@ class SellerController extends Controller
     }
 
     public function Osatus(){
-        return view('seller.ingredient.crud');
+        $users = DB::table('invoices')->where('status', '0')->get();
+        return view('seller.ingredient.crud')-> with('info', $users);
+    }
+    public function served($id){
+        
+        DB::table('invoices')
+        ->where('id', $id)
+        ->update([
+            'status' => '1',
+            ]);
+            return redirect()->route('Ostatus');
     }
 
     public function goodsEntry(){
@@ -79,6 +89,63 @@ class SellerController extends Controller
         }
     }
 
+    public function submitRawGoods(Request $request){
+        //dd($request->all());
+        $getUser=auth()->user()->id;
+        $outlet = Employee::where('log_id', $getUser)->first()->out_id;
+        //dd($user);
+        for ($i=0; $i < count($request->bal); $i++) { 
+            DB::table('inventory__raw__materials')->insert([
+                    //col=======value
+                    'product_name' => $request->prod_name[$i],
+                    'product_type' => $request->prod_type[$i],
+                    'date' => $request->date[$i],
+                    'opening' => $request->opening[$i],
+                    'receive' => $request->rec[$i],
+                    'total' => $request->total[$i],
+                    'exp' => $request->exp[$i],
+                    'balance' => $request->bal[$i],
+                    'out_id' => $outlet
+                    
+                ]);
+        }
+        return redirect()->route('inventory');
+    }
+
+    public function packedFood(){
+        
+        //return view('seller.inventory.insert-rawGoods')-> with('lastBal', $Bal); //{{$lastBal}}
+        return view('seller.inventory.packed_item');
+    }
+
+    public function packedFoodInsert(Request $request){
+        
+        $getUser=auth()->user()->id;
+        $outlet = Employee::where('log_id', $getUser)->first()->out_id;
+        //dd($user);
+        for ($i=0; $i < count($request->exp_date); $i++) { 
+            DB::table('packed__ingredients')->insert([
+                    //col=======value
+                    'prod_name' => $request->prod_name[$i],
+                    'prod_type' => $request->prod_type[$i],
+                    'cost' => $request->cost[$i],
+                    'buy_date' => $request->buy_date[$i],
+                    'exp_date' => $request->exp_date[$i],
+                    'out_id' => $outlet
+                    
+                ]);
+        }
+        return redirect()->route('inventory');
+    }
+
+    public function viewInventory(){
+        $getUser=auth()->user()->id;
+        $outlet = Employee::where('log_id', $getUser)->first()->out_id;
+        $userss = DB::table('inventory__raw__materials')->where('out_id', $outlet)->get();
+        $users = DB::table('packed__ingredients')->where('out_id', $outlet)->get();
+        return view('seller.inventory.view-inventory')-> with('info', $users)-> with('data', $userss);
+        //return redirect()->route('inventory');
+    }
 
     
 }
