@@ -28,7 +28,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.employee.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
         $emp = Employee::find($id);
         $emp->emp_name = $request->name;
         $emp->contact = $request->contact;
-        $emp->about = ($request->about == null) ? $user->about : $request->about;
+        $emp->about = ($request->about == null) ? $emp->about : $request->about;
         $emp->save();
 
         return Redirect()->route('employee.show',['id' => $id]);

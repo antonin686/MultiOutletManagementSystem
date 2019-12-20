@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -100,7 +100,6 @@ class AdminController extends Controller
     {
         $user = Employee::where('log_id', auth()->user()->id)->first();
 
-        //dd($user);
         $user->emp_name = $request->name;
         $user->contact = $request->contact;
         $user->about = ($request->about == null) ? $user->about : $request->about;

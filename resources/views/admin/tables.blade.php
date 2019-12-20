@@ -48,31 +48,36 @@
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="employee">
-                        <div class="card-body table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-warning">
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Salary</th>
-                                    <th>Role</th>
-                                </thead>
-                                <tbody>
-                                    @foreach($tables->emps as $emp)
-                                    <tr id="{{$emp->id}}">
-                                        <td>{{$emp->id}}</td>
-                                        <td>{{$emp->username}}</td>
-                                        <td>{{$emp->salary}}</td>
-                                        <td>{{$emp->role_name}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <a class="btn btn-info btn-round mb-2" href="{{ route('employee.create') }}">
+                            Add Employee
+                        </a>
+                        <div class="">
+                            <div class="card-body table-responsive">
+                                <table id="table-employee" class="table table-hover">
+                                    <thead class="text-warning">
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Salary</th>
+                                        <th>Role</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($tables->emps as $emp)
+                                        <tr id="{{$emp->id}}">
+                                            <td>{{$emp->id}}</td>
+                                            <td>{{$emp->username}}</td>
+                                            <td>{{$emp->salary}}</td>
+                                            <td>{{$emp->role_name}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
                     <div class="tab-pane" id="outlet">
                         <div class="card-body table-responsive">
-                            <table class="table table-hover">
+                            <table id="table-outlet" class="table table-hover">
                                 <thead class="text-warning">
                                     <th>ID</th>
                                     <th>Username</th>
@@ -104,19 +109,21 @@
 </div>
 
 <script>
-
 $(document).ready(() => {
-  
-    
-    $('#employee').on('click','tr', (event) => {
-        
+
+    $('#table-employee').DataTable();
+    $('#table-outlet').DataTable();
+
+
+    $('#employee').on('click', 'tr', (event) => {
+
         var id = $(event.currentTarget).attr("id");
-        
-        if(id != null)
-        {
-            window.location.href= `/admin/employee/${id}`;
+
+        if (id != null) {
+            window.location.href = `/admin/employee/${id}`;
         }
     });
 });
 </script>
+
 @endsection
