@@ -17,8 +17,11 @@ class CreateBookingsTable extends Migration
             $table->bigIncrements('id');
             $table->string('booked_for');         
             $table->string('contact');
-            $table->date('time');
+            $table->integer('cus_amount');       
+            $table->dateTime('time');
             $table->string('booked_by');
+            $table->integer('table_id');   
+            $table->integer('out_id');       
             $table->timestamps();
         });
     }

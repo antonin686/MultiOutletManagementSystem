@@ -1,11 +1,5 @@
 <?php
-
-Route::get('/home', function () {
-    //Session::put('id','bitch pls');
-   // Session::flush();
-    return view('manager.home')->with("title","Manager Dashboard");
-    //echo 'session("id)';
-});
+Route::get('/home', 'manager\ManagerController@home')->name('manager.home');
 
 Auth::routes();
 
@@ -50,10 +44,34 @@ Route::get('/productlist/delete/{id}','manager\InventoryController@destroy_produ
 Route::get('/outlet/design','manager\DesignController@index')->name('designOutlet');
 Route::post('/outlet/design','manager\DesignController@insert')->name('insert');
 
+Route::get('/outlet/tables','manager\DesignController@edit_outlet')->name('editOutlet');
+
+Route::get('/outlet/edit','manager\DesignController@change_outlet')->name('changeOutlet');
+Route::post('/outlet/edit','manager\DesignController@update_outlet')->name('updateOutlet');
+
+Route::get('/outlet/table/delete/{id}','manager\DesignController@destroy_table')->name('destroyTable');
+
 Route::get('/outlet/info','manager\ManagerController@outlet_info')->name('outletInfo');
 
 Route::get('/booking','manager\DesignController@booking')->name('booking');
 Route::post('/booking','manager\DesignController@insert_booking')->name('insertBooking');
+
+Route::get('/bookedSeats','manager\DesignController@booked_seats')->name('bookedSeats');
+
+Route::get('/bookedSeats/delete/{id}','manager\DesignController@destroy_seat')->name('destroySeat');
+
+Route::get('/orders/pending','manager\ManagerController@pending_orders')->name('pendingOrders');
+
+Route::get('/orders/pending/delete/{id}','manager\ManagerController@destroy_pending')->name('destroyPending');
+
+Route::get('/orders/completed','manager\ManagerController@completed_orders')->name('completedOrders');
+
+Route::get('/attendance','manager\ManagerController@attendance')->name('attendance');
+Route::post('/attendance','manager\ManagerController@insert_attendance')->name('insertAttendance');
+
+Route::get('/attendance/view','manager\ManagerController@view_attendance')->name('viewAttendance');
+Route::post('/attendance/view','manager\ManagerController@load_attendance')->name('loadAttendance');
+
 
 
 

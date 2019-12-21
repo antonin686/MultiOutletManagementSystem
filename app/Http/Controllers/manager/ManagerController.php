@@ -5,12 +5,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Employee;
+use App\Invoice;
+use App\Attendance;
+use App\Design;
+use App\Inventory;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+Use \Carbon\Carbon;
 
 class ManagerController extends Controller
 {
+    public function home()
+    {
+        $atten =  Attendance::all()->where('created_at', Carbon::now())->count();
+        $table =  Design::all()->where('status', 1)->count();
+        $table1 =  Design::all()->where('status', 0)->count();
+        $pro =  Inventory::count();
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+        
+        $data = DB::table('employees')
+                 ->join('outlets', 'employees.out_id', '=', 'outlets.id')
+                 ->select('employees.id','employees.emp_name','employees.contact','employees.salary')
+                 ->where('employees.log_id', '!=', $id)
+                 ->where('employees.out_id', '=', $outlet[0]->id)
+                 ->count();
+
+        return view('manager.home')->with("title","Manager Dashboard")->with('atten', $atten)->with('table', $table)->with('table1', $table1)->with('pro', $pro)->with('data', $data);
+    }
+
     public function manager_profile(){
         $id = Auth::user()->id;
         $data = DB::table('employees')
@@ -154,6 +182,7 @@ class ManagerController extends Controller
 
     public function update_employee(Request $request)
     {
+        //return $request;
         $this->validate($request,[
             'name' => 'required',
             'contact' => 'required|numeric|min:11',
@@ -200,5 +229,128 @@ class ManagerController extends Controller
         //return $data;
         return view('manager.outlet.info')->with("title","Outlet Information")->with("data",$data);
     }
+
+    public function pending_orders()
+    {
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+
+        $data = Invoice::all()->where('status', 0)->where('out_id', $outlet[0]->id);
+        return view('manager.orders.pending')->with("title","Pending Orders")->with("data",$data);
+    }
+
+    public function destroy_pending($id)
+    {
+        $data = Invoice::findOrFail($id);
+       // print_r($data);
+        $data->delete();
+    }
+
+    public function completed_orders()
+    {
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+
+        $data = Invoice::all()->where('status', 1)->where('out_id', $outlet[0]->id);
+        return view('manager.orders.completed')->with("title","Completed Orders")->with("data",$data);
+    }
+
+    public function attendance()
+    {
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+        
+        $data = DB::table('employees')
+                 ->join('outlets', 'employees.out_id', '=', 'outlets.id')
+                 ->select('employees.id','employees.emp_name','employees.contact','employees.salary')
+                 ->where('employees.log_id', '!=', $id)
+                 ->where('employees.out_id', '=', $outlet[0]->id)
+                 ->get();
+
+        //return $data;
+        return view('manager.attendance.take_attendance')->with("title","Take Attendance")->with("data",$data);
+    }
     
+    public function insert_attendance(Request $request)
+    {
+        $this->validate($request,[
+            'checkbox' => 'required_without_all',
+        ]);
+        
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+
+        $ids = $request->input('checkbox');
+        foreach($ids as $id){
+         //var_dump($service);
+         $user = Employee::all()->where('id', $id)->first();
+         //var_dump($user);
+        Attendance::create([
+            'emp_name'=> $user->emp_name,
+            'contact'=> $user->contact,
+            'out_id'=>$outlet[0]->id,
+        ]);
+        }
+        return redirect()->route('attendance')->with('message',"Attendance Taken Successfully!!");
+    }
+
+    public function view_attendance()
+    {
+        $id = Auth::user()->id;
+
+        $outlet = DB::table('employees')
+        ->select('employees.out_id as id')
+        ->where('employees.log_id', '=', $id)
+        ->get();
+        
+        $data = DB::table('employees')
+                 ->join('outlets', 'employees.out_id', '=', 'outlets.id')
+                 ->select('employees.id','employees.emp_name','employees.contact','employees.salary')
+                 ->where('employees.log_id', '!=', $id)
+                 ->where('employees.out_id', '=', $outlet[0]->id)
+                 ->get();
+
+        return view('manager.attendance.view_attendance')->with("title","View Attendance")->with("data",$data)->with("info","");
+    }
+
+    public function load_attendance(Request $request)
+    {
+        $this->validate($request,[
+            'emp_name' => 'required|not_in:0',
+        ]);
+       //return $request;
+       $id = Auth::user()->id;
+
+       $outlet = DB::table('employees')
+       ->select('employees.out_id as id')
+       ->where('employees.log_id', '=', $id)
+       ->get();
+       
+       $data = DB::table('employees')
+                ->join('outlets', 'employees.out_id', '=', 'outlets.id')
+                ->select('employees.id','employees.emp_name','employees.contact','employees.salary')
+                ->where('employees.log_id', '!=', $id)
+                ->where('employees.out_id', '=', $outlet[0]->id)
+                ->get();
+
+       $info = Attendance::all()->where('emp_name',$request->emp_name);
+
+       return view('manager.attendance.view_attendance')->with("title","View Attendance")->with("data",$data)->with("info",$info);
+    }
 }
