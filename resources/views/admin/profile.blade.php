@@ -72,7 +72,7 @@
                         </button>
                     @endif
 
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <button type="submit" class="btn btn-primary btn-round pull-right">Update Profile</button>
                     <div class="clearfix"></div>
                 </form>
             </div>

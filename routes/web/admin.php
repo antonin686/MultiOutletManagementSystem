@@ -20,5 +20,10 @@ Route::get('/tables', 'admin\AdminController@table')->name('admin.tables');
 
 Route::get('/ajax/getValues', 'admin\AjaxController@show');
 
-Route::get('/employee/{id}', 'admin\EmployeeController@show')->name('employee.show');
-Route::post('/employee/{id}', 'admin\EmployeeController@update');
+Route::get('/employee/show/{id}', 'admin\EmployeeController@show')->name('employee.show');
+Route::post('/employee/show/{id}', 'admin\EmployeeController@update');
+
+
+
+Route::get('/employee/create', 'admin\EmployeeController@create')->name('employee.create');
+Route::post('/employee/create', 'admin\EmployeeController@store');
