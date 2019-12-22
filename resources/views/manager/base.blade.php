@@ -11,6 +11,7 @@
 
   <title>{{$title}}</title>
   <link rel="icon" type="image/gif/png" href="{{asset('/images/download.png')}}">
+  @yield('css')
 
   <!-- Custom fonts for this template-->
   <link href="/custom/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,30 +41,6 @@
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{Auth::user()->username}}
@@ -95,8 +72,8 @@
           <span>Attendance</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="login.html">Take Attendance</a>
-          <a class="dropdown-item" href="register.html">View Attendance</a>
+          <a class="dropdown-item" href="{{route('attendance')}}">Take Attendance</a>
+          <a class="dropdown-item" href="{{route('viewAttendance')}}">View Attendance</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -107,6 +84,7 @@
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{{route('outletInfo')}}">My Outlet</a>
             <a class="dropdown-item" href="{{route('designOutlet')}}">Design Outlet</a>
+            <a class="dropdown-item" href="{{route('editOutlet')}}">Edit Outlet</a>
           </div>
         </li>
       <li class="nav-item dropdown">
@@ -122,7 +100,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-boxes"></i>
-              <span>Inventory</span>
+              <span>Products</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
               <a class="dropdown-item" href="{{route('ProductTypePage')}}">Add Catagory</a>
@@ -130,17 +108,25 @@
               <a class="dropdown-item" href="{{route('productList')}}">Product List</a>
           </div>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('booking')}}">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-table"></i>
               <span>Seat Reservation</span>
             </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <a class="dropdown-item" href="{{route('booking')}}">Seat Booking</a>
+              <a class="dropdown-item" href="{{route('bookedSeats')}}">Reserved Seats</a>
+          </div>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-sort-alpha-up"></i>
               <span>Orders</span>
             </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <a class="dropdown-item" href="{{route('pendingOrders')}}">Pending Orders</a>
+              <a class="dropdown-item" href="{{route('completedOrders')}}">Completed Orders</a>
+          </div>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="{{route('manager.profile')}}">
@@ -150,11 +136,11 @@
         </li>
     </ul>
 
-    <div id="content-wrapper" style="background:-webkit-repeating-linear-gradient(90deg,white,cyan,white)">
+    <div id="content-wrapper" style="" class="bg-primary">
       <div class="container-fluid col-sm-10 offset-sm-1">
           @yield('content')
       </div>
-      <div class="container-fluid col-sm-12">
+      <div class="container-fluid col-sm-10 offset-sm-1">
           @yield('booking')
       </div>
       <!-- /.container-fluid -->
