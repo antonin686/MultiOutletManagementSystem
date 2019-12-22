@@ -16,8 +16,23 @@
 
             </div>
             <div class="card-body ">
-                <form method="POST">
+                @if (count($errors) > 0)
+                <p class="alert alert-danger mb-3">
+                    @foreach ($errors->all() as $error)
+                    {{$error}} <br>
+                    @endforeach
+                </p>
+                @endif
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+
+                <form method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="col">
+
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Company</label>
@@ -28,43 +43,67 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Username</label>
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="username" value="{{old('username')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Password</label>
-                                <input type="password" value="password" class="form-control">
+                                <input type="password" name="password"value="password" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Name</label>
-                                <input type="text" name="name" value="" class="form-control">
+                                <input type="text" name="name"  value="{{old('name')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Contact</label>
-                                <input type="text" name="contact" value="" class="form-control">
+                                <input type="text" name="contact" value="{{old('contact')}}" class="form-control">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Example select</label>
-                            <select class="form-control selectpicker" data-style="btn btn-link"
-                                id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Salary</label>
+                                <input type="text" name="salary" value="{{old('salary')}}" class="form-control">
+                            </div>
                         </div>
 
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="out_id">Outlet</label>
+                                <select class="custom-select" name="out_id">
+                                    @foreach($outlets as $outlet)
+                                    <option value="{{$outlet->id}}">{{$outlet->out_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select class="custom-select" name="role">
+                                    <option value="2">Manager</option>
+                                    <option value="3">Seller</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="img">Upload Image</label>
+                            <div class="input-group">
+                                <input type="file" name="img" id="img">
+                            </div>
+
+                        </div>
 
                     </div>
 
