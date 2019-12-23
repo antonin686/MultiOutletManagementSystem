@@ -136,7 +136,7 @@
         </li>
     </ul>
 
-    <div id="content-wrapper" style="" class="bg-primary">
+    <div id="content-wrapper" style="background: linear-gradient(to bottom left, #33ccff 0%, #ccccff 100%);" class="">
       <div class="container-fluid col-sm-10 offset-sm-1">
           @yield('content')
       </div>

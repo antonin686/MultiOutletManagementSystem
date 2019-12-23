@@ -13,7 +13,11 @@
         {{ session()->get('message') }}
     </div>
 @endif
-
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
 <form method="POST" class="container shadow-lg p-3 mb-5 bg-blue rounded" style="opacity:0.9;background:white" action="{{route('managerProfile.password')}}">
     @csrf
         <div class="form-group" style="color:black">
