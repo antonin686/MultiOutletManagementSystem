@@ -23,6 +23,11 @@ return array(
     'App\\Http\\Controllers\\admin\\AdminController' => $baseDir . '/app/Http/Controllers/admin/AdminController.php',
     'App\\Http\\Controllers\\admin\\AjaxController' => $baseDir . '/app/Http/Controllers/admin/AjaxController.php',
     'App\\Http\\Controllers\\admin\\EmployeeController' => $baseDir . '/app/Http/Controllers/admin/EmployeeController.php',
+<<<<<<< HEAD
+    'App\\Http\\Controllers\\admin\\OrderController' => $baseDir . '/app/Http/Controllers/admin/OrderController.php',
+    'App\\Http\\Controllers\\admin\\OutletController' => $baseDir . '/app/Http/Controllers/admin/OutletController.php',
+=======
+>>>>>>> 976385dec05b59dc7fd2f1d2528732dfb7b5820f
     'App\\Http\\Controllers\\manager\\DesignController' => $baseDir . '/app/Http/Controllers/manager/DesignController.php',
     'App\\Http\\Controllers\\manager\\InventoryController' => $baseDir . '/app/Http/Controllers/manager/InventoryController.php',
     'App\\Http\\Controllers\\manager\\ManagerController' => $baseDir . '/app/Http/Controllers/manager/ManagerController.php',
@@ -42,6 +47,10 @@ return array(
     'App\\Invoice' => $baseDir . '/app/Invoice.php',
     'App\\Order' => $baseDir . '/app/Order.php',
     'App\\Outlet' => $baseDir . '/app/Outlet.php',
+<<<<<<< HEAD
+    'App\\OutletTable' => $baseDir . '/app/OutletTable.php',
+=======
+>>>>>>> 976385dec05b59dc7fd2f1d2528732dfb7b5820f
     'App\\PackedIngredientInventory-m' => $baseDir . '/app/PackedIngredientInventory-m.php',
     'App\\Packed_Ingredient' => $baseDir . '/app/Packed_Ingredient.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
@@ -50,6 +59,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Role' => $baseDir . '/app/Role.php',
+    'App\\Table' => $baseDir . '/app/Table.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Balping\\JsonRaw\\Encoder' => $vendorDir . '/balping/json-raw-encoder/src/Encoder.php',
     'Balping\\JsonRaw\\Raw' => $vendorDir . '/balping/json-raw-encoder/src/Raw.php',

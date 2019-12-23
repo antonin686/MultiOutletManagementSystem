@@ -5,49 +5,68 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Hash;
 use App\User;
 use App\Employee;
 use App\Outlet;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        return redirect()->route('admin.tables')->with('tab', 'employee');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin.employee.create');
+        $outlets = Outlet::all();
+        //dd($outlets[]);
+        return view('admin.employee.create')->with('outlets', $outlets);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+
+        $this->validate($request,[
+            'name' => 'required',
+            'username' => 'required|unique:logins',
+            'contact' => 'required|numeric|min:11',
+            'salary' => 'required|numeric',
+            'password' => 'required|min:3',
+        ]);
+
+        $file = $request->file('img');
+        $name = "";
+
+        if($file)
+        {
+            $name = time() . rand() . '.' . $file->getClientOriginalExtension();
+            $file->move('uploads', $name);
+        }
+
+        $path = "/uploads/".$name;
+    
+        //dd($path);
+        $login = new User();
+        $login->username = $request->username;
+        $login->password = Hash::make($request->password);
+        $login->role = $request->role;
+        $login->save();
+
+        $emp = new Employee();
+        $emp->emp_name = $request->name;
+        $emp->contact = $request->contact;
+        $emp->salary = $request->salary;
+        $emp->out_id = $request->out_id;
+        $emp->log_id = $login->id;
+        $emp->img = $file ? $path : "/uploads/person.jpg";
+        $emp->save();
         
+        $message = "Employee $request->username Has Been Added Successfully!!";
+        return redirect()->route('employee.create')->with('message',$message);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = DB::table('employees')
@@ -56,47 +75,42 @@ class EmployeeController extends Controller
             ->where('employees.id', $id)
             ->first();
 
-        return view('admin.profile')->with('user', $user);
+        return view('admin.employee.show')->with('user', $user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name' => 'required',
+            'contact' => 'required|numeric|min:11',
+            'salary' => 'required|numeric',
+        ]);
+
         $emp = Employee::find($id);
         $emp->emp_name = $request->name;
         $emp->contact = $request->contact;
+        $emp->salary = $request->salary;
         $emp->about = ($request->about == null) ? $emp->about : $request->about;
         $emp->save();
 
-        return Redirect()->route('employee.show',['id' => $id]);
+        $message = "Employee Has Been Updated Successfully!!";
+
+        return Redirect()->route('employee.show',['id' => $id])->with('message',$message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $emp = Employee::find($id);
+        $login = User::find($emp->log_id);
+
+        $emp->delete();
+        $login->delete();
+
+        return redirect()->route('admin.tables');
     }
 }

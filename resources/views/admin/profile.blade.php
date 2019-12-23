@@ -3,10 +3,10 @@
 @section('breadcrumb')
 
 @if($user->role == 1)
-    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+<li class="breadcrumb-item active" aria-current="page">User Profile</li>
 @else
-    <li class="breadcrumb-item"><a href="{{ route('admin.tables') }}">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Employee Profile</li>
+<li class="breadcrumb-item"><a href="{{ route('admin.tables') }}">Tables</a></li>
+<li class="breadcrumb-item active" aria-current="page">Employee Profile</li>
 @endif
 
 @endsection
@@ -18,14 +18,24 @@
         <div class="card">
             <div class="card-header card-header-primary">
                 <h4 class="card-title">Edit Profile</h4>
-                @if($user->role == 1)
                 <p class="card-category">Complete your profile</p>
-                @else
-                <p class="card-category">Complete Employee Profile</p>
-                @endif
             </div>
             <div class="card-body">
+                @if (count($errors) > 0)
+                <p class="alert alert-danger mb-3">
+                    @foreach ($errors->all() as $error)
+                    {{$error}} <br>
+                    @endforeach
+                </p>
+                @endif
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+
                 <form method="POST">
+                    @csrf
                     <div class="col">
                         <div class="col-md-5 mx-auto">
                             <div class="form-group">
@@ -64,13 +74,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    @if($user->role == 2)
-                        <button type="button" class="btn btn-danger btn-round" data-toggle="modal"
-                            data-target="#deleteModal">
-                            Delete Profile
-                        </button>
-                    @endif
 
                     <button type="submit" class="btn btn-primary btn-round pull-right">Update Profile</button>
                     <div class="clearfix"></div>
@@ -96,23 +99,4 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete this profile?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection

@@ -49,8 +49,21 @@
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{route('admin.tables')}}">
-                            <i class="material-icons">content_paste</i>
+                            <i class="fas fa-bars"></i>
                             <p>Table List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('booking.create')}}">
+                            <i class="material-icons">import_contacts</i>
+                            <p>Seat Booking</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('admin.attendence')}}">
+                            <!-- <i class="material-icons">content_paste</i> -->
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>Attendence</p>
                         </a>
                     </li>
                 </ul>
@@ -64,7 +77,7 @@
                     <div class="navbar-wrapper">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                               @yield('breadcrumb')
+                                @yield('breadcrumb')
                             </ol>
                         </nav>
 
@@ -77,17 +90,8 @@
                         <span class="navbar-toggler-icon icon-bar"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end">
-                        <form class="navbar-form">
-                            <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
-                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                    <div class="ripple-container"></div>
-                                </button>
-                            </div>
-                        </form>
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">notifications</i>
@@ -103,20 +107,22 @@
                                     <a class="dropdown-item" href="#">Another Notification</a>
                                     <a class="dropdown-item" href="#">Another One</a>
                                 </div>
-                            </li>
+                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">person</i>
+                                    <i class="material-icons">person</i> welcome, {{ Auth::user()->username}}
                                     <p class="d-lg-none d-md-block">
                                         Account
                                     </p>
                                 </a>
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#">Profile</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a>
+                                    <a class="dropdown-item" href="{{route('admin.change_password')}}">Change
+                                        Password</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Log out</a>
+                                    <a class="dropdown-item" href="{{route('admin.logout')}}">Log out</a>
                                 </div>
                             </li>
                         </ul>
@@ -184,7 +190,7 @@
     <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
-        md.initDashboardPageCharts();
+        //md.initDashboardPageCharts();
     });
     </script>
 </body>

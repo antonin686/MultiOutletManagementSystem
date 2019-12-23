@@ -435,6 +435,11 @@ class ComposerStaticInitf56834ed164d3a39af6803373ece8dce
         'App\\Http\\Controllers\\admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/AdminController.php',
         'App\\Http\\Controllers\\admin\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/AjaxController.php',
         'App\\Http\\Controllers\\admin\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/EmployeeController.php',
+<<<<<<< HEAD
+        'App\\Http\\Controllers\\admin\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/OrderController.php',
+        'App\\Http\\Controllers\\admin\\OutletController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/OutletController.php',
+=======
+>>>>>>> 976385dec05b59dc7fd2f1d2528732dfb7b5820f
         'App\\Http\\Controllers\\manager\\DesignController' => __DIR__ . '/../..' . '/app/Http/Controllers/manager/DesignController.php',
         'App\\Http\\Controllers\\manager\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/manager/InventoryController.php',
         'App\\Http\\Controllers\\manager\\ManagerController' => __DIR__ . '/../..' . '/app/Http/Controllers/manager/ManagerController.php',
@@ -454,6 +459,10 @@ class ComposerStaticInitf56834ed164d3a39af6803373ece8dce
         'App\\Invoice' => __DIR__ . '/../..' . '/app/Invoice.php',
         'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
         'App\\Outlet' => __DIR__ . '/../..' . '/app/Outlet.php',
+<<<<<<< HEAD
+        'App\\OutletTable' => __DIR__ . '/../..' . '/app/OutletTable.php',
+=======
+>>>>>>> 976385dec05b59dc7fd2f1d2528732dfb7b5820f
         'App\\PackedIngredientInventory-m' => __DIR__ . '/../..' . '/app/PackedIngredientInventory-m.php',
         'App\\Packed_Ingredient' => __DIR__ . '/../..' . '/app/Packed_Ingredient.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -462,6 +471,7 @@ class ComposerStaticInitf56834ed164d3a39af6803373ece8dce
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
+        'App\\Table' => __DIR__ . '/../..' . '/app/Table.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Balping\\JsonRaw\\Encoder' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Encoder.php',
         'Balping\\JsonRaw\\Raw' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Raw.php',
