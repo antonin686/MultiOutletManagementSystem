@@ -45,8 +45,6 @@
                         <thead class="thead-dark" align="center">
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">CONTACT</th>
                             <th scope="col">DATE</th>
                             </tr>
                         </thead>
@@ -54,9 +52,7 @@
                             @foreach($info as $dt)
                             <tr class="bg-light" id="{{$dt->id}}">
                                 <th scope="row"> {{$dt->id}} </th>
-                                <td class="profile_view">{{$dt->emp_name}}</td>
-                                <td>{{$dt->contact}}</td>
-                                <td>{{$dt->created_at}}</td>
+                                <td>{{($dt->created_at)->toDateString()}}</td>
                             </tr>
                             @endforeach
                         </tbody>

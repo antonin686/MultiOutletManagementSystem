@@ -12,13 +12,15 @@ use App\Inventory;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-Use \Carbon\Carbon;
+Use Carbon\Carbon;
 
 class ManagerController extends Controller
 {
     public function home()
     {
-        $atten =  Attendance::all()->where('created_at', Carbon::now())->count();
+        $atten =  Attendance::whereDate('created_at', Carbon::today())->count();
+        //$atten = count($attend);
+        //dd($attend);
         $table =  Design::all()->where('status', 1)->count();
         $table1 =  Design::all()->where('status', 0)->count();
         $pro =  Inventory::count();
@@ -97,7 +99,7 @@ class ManagerController extends Controller
           $obj_user = User::find($id);
           $obj_user->password = Hash::make($request['password']);;
           $obj_user->save(); 
-          return redirect('/manager/home');
+          return redirect()->route('managerProfile.settings')->with('success','Password Updated!!');
         }
         else{
             return redirect()->back()->with([
