@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        error_log('dadada');
+        //error_log('dadada');
         
         if (Auth::check()) {
 

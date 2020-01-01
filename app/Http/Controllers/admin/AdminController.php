@@ -13,6 +13,7 @@ use Session;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -46,6 +47,7 @@ class AdminController extends Controller
         $orders = DB::table('orders')
             ->select('orders.id', 'orders.out_id', 'item_list.item_name', 'orders.quantity', 'orders.total_price')
             ->join('item_list', 'item_list.id', '=', 'orders.item_id')
+            ->whereDate('orders.created_at', Carbon::today())
             ->get();
 
         $invens = DB::table('inventories')

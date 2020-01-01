@@ -327,7 +327,7 @@ $(document).ready(function() {
                 showGrid: false
             },
             low: 0,
-            high: 1000,
+            high: 2000,
             chartPadding: {
                 top: 0,
                 right: 0,
